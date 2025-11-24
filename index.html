@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Interprétariat Judiciaire</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Police classe -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Icônes Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+      body {
+        font-family: "Playfair Display", "Times New Roman", serif;
+      }
+    </style>
+  </head>
+  <body class="bg-slate-900 text-white">
+    <div
+      class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white"
+    >
+      <!-- Header -->
+      <header
+        class="fixed top-0 w-full bg-slate-900/80 backdrop-blur-md z-50 border-b border-slate-700/50"
+      >
+        <nav
+          class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center"
+        >
+          <div class="flex items-center space-x-2">
+            <i data-lucide="scale" class="w-8 h-8 text-red-500"></i>
+            <span class="text-2xl font-bold tracking-wide">
+              Interprétariat
+            </span>
+          </div>
+
+          <div class="hidden md:flex space-x-8 text-sm uppercase tracking-wide">
+            <button
+              data-section="home"
+              id="nav-home"
+              class="transition-colors hover:text-red-400 text-red-400"
+            >
+              Accueil
+            </button>
+            <button
+              data-section="about"
+              id="nav-about"
+              class="transition-colors hover:text-red-400"
+            >
+              À Propos
+            </button>
+            <button
+              data-section="services"
+              id="nav-services"
+              class="transition-colors hover:text-red-400"
+            >
+              Services
+            </button>
+            <button
+              data-section="contact"
+              id="nav-contact"
+              class="transition-colors hover:text-red-400"
+            >
+              Contact
+            </button>
+          </div>
+
+          <div class="flex space-x-3 text-sm font-semibold tracking-wide">
+            <button
+              class="px-3 py-1 rounded bg-red-600 text-slate-900"
+              data-lang="fr"
+            >
+              FR
+            </button>
+            <button
+              class="px-3 py-1 rounded bg-slate-700/50 hover:bg-slate-700"
+              data-lang="tr"
+            >
+              TR
+            </button>
+            <button
+              class="px-3 py-1 rounded bg-slate-700/50 hover:bg-slate-700"
+              data-lang="en"
+            >
+              EN
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      <!-- Hero Section -->
+      <section
+        id="home"
+        class="relative min-h-screen flex items-center justify-center pt-20 px-6"
+      >
+        <div
+          class="absolute inset-0 opacity-20 bg-cover bg-center"
+          style="background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1600');"
+        ></div>
+        <div
+          class="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/50 to-slate-900"
+        ></div>
+
+        <div class="relative z-10 text-center max-w-4xl">
+          <h1
+            id="hero-title"
+            class="text-5xl md:text-7xl font-bold mb-6 leading-tight tracking-tight"
+          >
+            Interprétariat Judiciaire
+          </h1>
+          <p
+            id="hero-subtitle"
+            class="text-xl md:text-2xl text-slate-200 mb-8 font-light tracking-wide"
+          >
+            Excellence et Précision dans la Traduction Juridique Turc-Français
+          </p>
+          <button
+            id="hero-cta"
+            class="bg-red-600 hover:bg-red-700 text-slate-900 font-semibold px-8 py-4 rounded-lg transition-all transform hover:scale-105 tracking-wide"
+            data-scroll-to="contact"
+          >
+            Nous Contacter
+          </button>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section id="about" class="py-20 px-6 bg-slate-800/50">
+        <div class="max-w-4xl mx-auto">
+          <h2
+            id="about-title"
+            class="text-4xl font-bold mb-8 text-center text-red-400 tracking-wide"
+          >
+            Notre Expertise
+          </h2>
+          <div class="flex flex-col md:flex-row gap-8 items-center">
+            <div class="md:w-1/2">
+              <img
+                src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=800"
+                alt="Justice"
+                class="rounded-lg shadow-2xl"
+              />
+            </div>
+            <div class="md:w-1/2">
+              <p
+                id="about-text"
+                class="text-lg text-slate-200 leading-relaxed"
+              >
+                Experts assermentés en interprétariat judiciaire, nous mettons à
+                votre service plus de 15 ans d'expérience dans la traduction
+                juridique turc-français. Notre entreprise familiale garantit un
+                service professionnel, confidentiel et de haute qualité pour
+                tous vos besoins juridiques et administratifs.
+              </p>
+              <div class="mt-6 space-y-3 text-slate-100">
+                <div class="flex items-center gap-2">
+                  <i
+                    data-lucide="check-circle"
+                    class="w-5 h-5 text-red-400"
+                  ></i>
+                  <span id="about-badge-1">Traducteurs assermentés</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i
+                    data-lucide="check-circle"
+                    class="w-5 h-5 text-red-400"
+                  ></i>
+                  <span id="about-badge-2">15+ années d'expérience</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i
+                    data-lucide="check-circle"
+                    class="w-5 h-5 text-red-400"
+                  ></i>
+                  <span id="about-badge-3">Confidentialité garantie</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Section -->
+      <section id="services" class="py-20 px-6">
+        <div class="max-w-6xl mx-auto">
+          <h2
+            id="services-title"
+            class="text-4xl font-bold mb-12 text-center text-red-400 tracking-wide"
+          >
+            Nos Services
+          </h2>
+          <div id="services-grid" class="grid md:grid-cols-3 gap-8">
+            <!-- Rempli par JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact" class="py-20 px-6 bg-slate-800/50">
+        <div class="max-w-4xl mx-auto">
+          <h2
+            id="contact-title"
+            class="text-4xl font-bold mb-12 text-center text-red-400 tracking-wide"
+          >
+            Contactez-Nous
+          </h2>
+          <div class="grid md:grid-cols-2 gap-8">
+            <div
+              class="bg-slate-900/50 p-8 rounded-lg border border-slate-700/50"
+            >
+              <div class="flex items-center gap-4 mb-4">
+                <i data-lucide="mail" class="w-8 h-8 text-red-400"></i>
+                <div>
+                  <p
+                    id="contact-email-label"
+                    class="text-sm text-slate-400 uppercase tracking-wide"
+                  >
+                    Email
+                  </p>
+                  <a
+                    href="mailto:interpretes@example.com"
+                    class="text-lg hover:text-red-400 transition-colors"
+                  >
+                    interpretes@example.com
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-slate-900/50 p-8 rounded-lg border border-slate-700/50"
+            >
+              <div class="flex items-center gap-4 mb-4">
+                <i data-lucide="phone" class="w-8 h-8 text-red-400"></i>
+                <div>
+                  <p
+                    id="contact-phone-label"
+                    class="text-sm text-slate-400 uppercase tracking-wide"
+                  >
+                    Téléphone
+                  </p>
+                  <a
+                    href="tel:+33123456789"
+                    class="text-lg hover:text-red-400 transition-colors"
+                  >
+                    +33 1 23 45 67 89
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p
+            id="contact-availability"
+            class="text-center text-red-400 mt-8 font-semibold tracking-wide"
+          >
+            Disponibles 7j/7 pour vos urgences
+          </p>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="bg-slate-900 py-8 px-6 border-t border-slate-700/50">
+        <div
+          class="max-w-6xl mx-auto text-center text-slate-400 text-sm tracking-wide"
+        >
+          <p>© 2024 Interprétariat Judiciaire - Tous droits réservés</p>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Script de langue & navigation -->
+    <script>
+      const translations = {
+        fr: {
+          nav: {
+            home: 'Accueil',
+            about: 'À Propos',
+            services: 'Services',
+            contact: 'Contact',
+          },
+          hero: {
+            title: 'Interprétariat Judiciaire',
+            subtitle:
+              'Excellence et Précision dans la Traduction Juridique Turc-Français',
+            cta: 'Nous Contacter',
+          },
+          about: {
+            title: 'Notre Expertise',
+            text:
+              "Experts assermentés en interprétariat judiciaire, nous mettons à votre service plus de 15 ans d'expérience dans la traduction juridique turc-français. Notre entreprise familiale garantit un service professionnel, confidentiel et de haute qualité pour tous vos besoins juridiques et administratifs.",
+            badges: [
+              'Traducteurs assermentés',
+              "15+ années d'expérience",
+              'Confidentialité garantie',
+            ],
+          },
+          services: {
+            title: 'Nos Services',
+            items: [
+              {
+                icon: 'scale',
+                title: 'Interprétariat Judiciaire',
+                desc: 'Tribunaux, audiences, procédures légales',
+              },
+              {
+                icon: 'file-text',
+                title: 'Traduction Assermentée',
+                desc: 'Documents officiels et juridiques',
+              },
+              {
+                icon: 'users',
+                title: 'Accompagnement',
+                desc: 'Services administratifs et consulaires',
+              },
+            ],
+          },
+          contact: {
+            title: 'Contactez-Nous',
+            email: 'Email',
+            phone: 'Téléphone',
+            availability: 'Disponibles 7j/7 pour vos urgences',
+          },
+        },
+        tr: {
+          nav: {
+            home: 'Ana Sayfa',
+            about: 'Hakkımızda',
+            services: 'Hizmetler',
+            contact: 'İletişim',
+          },
+          hero: {
+            title: 'Adli Tercümanlık',
+            subtitle:
+              'Türkçe-Fransızca Hukuki Tercümede Mükemmellik ve Hassasiyet',
+            cta: 'Bize Ulaşın',
+          },
+          about: {
+            title: 'Uzmanlığımız',
+            text:
+              'Yeminli adli tercüman uzmanları olarak, Türkçe-Fransızca hukuki tercüme alanında 15 yılı aşkın deneyimimizi hizmetinize sunuyoruz. Aile şirketimiz, tüm yasal ve idari ihtiyaçlarınız için profesyonel, gizli ve yüksek kaliteli bir hizmet garantisi vermektedir.',
+            badges: [
+              'Yeminli tercümanlar',
+              '15+ yıllık deneyim',
+              'Gizlilik garantisi',
+            ],
+          },
+          services: {
+            title: 'Hizmetlerimiz',
+            items: [
+              {
+                icon: 'scale',
+                title: 'Adli Tercümanlık',
+                desc: 'Mahkemeler, duruşmalar, yasal prosedürler',
+              },
+              {
+                icon: 'file-text',
+                title: 'Yeminli Tercüme',
+                desc: 'Resmi ve hukuki belgeler',
+              },
+              {
+                icon: 'users',
+                title: 'Eşlik Hizmeti',
+                desc: 'İdari ve konsolosluk hizmetleri',
+              },
+            ],
+          },
+          contact: {
+            title: 'İletişim',
+            email: 'E-posta',
+            phone: 'Telefon',
+            availability: 'Acil durumlarınız için 7/24 hizmetinizdeyiz',
+          },
+        },
+        en: {
+          nav: {
+            home: 'Home',
+            about: 'About',
+            services: 'Services',
+            contact: 'Contact',
+          },
+          hero: {
+            title: 'Legal Interpreting',
+            subtitle:
+              'Excellence and Precision in Turkish-French Legal Translation',
+            cta: 'Contact Us',
+          },
+          about: {
+            title: 'Our Expertise',
+            text:
+              'As certified judicial interpreters, we bring over 15 years of experience in Turkish-French legal translation to your service. Our family business guarantees professional, confidential, and high-quality service for all your legal and administrative needs.',
+            badges: [
+              'Sworn interpreters',
+              '15+ years of experience',
+              'Guaranteed confidentiality',
+            ],
+          },
+          services: {
+            title: 'Our Services',
+            items: [
+              {
+                icon: 'scale',
+                title: 'Legal Interpreting',
+                desc: 'Courts, hearings, legal procedures',
+              },
+              {
+                icon: 'file-text',
+                title: 'Certified Translation',
+                desc: 'Official and legal documents',
+              },
+              {
+                icon: 'users',
+                title: 'Assistance',
+                desc: 'Administrative and consular services',
+              },
+            ],
+          },
+          contact: {
+            title: 'Contact Us',
+            email: 'Email',
+            phone: 'Phone',
+            availability: 'Available 7 days a week for emergencies',
+          },
+        },
+      };
+
+      let currentLang = 'fr';
+
+      function setActiveLangButton(lang) {
+        document
+          .querySelectorAll('[data-lang]')
+          .forEach((btn) =>
+            btn.classList.remove('bg-red-600', 'text-slate-900')
+          );
+        const active = document.querySelector(`[data-lang="${lang}"]`);
+        if (active) {
+          active.classList.add('bg-red-600', 'text-slate-900');
+        }
+      }
+
+      function setActiveNav(sectionId) {
+        document
+          .querySelectorAll('[data-section]')
+          .forEach((btn) => btn.classList.remove('text-red-400'));
+        const active = document.querySelector(`[data-section="${sectionId}"]`);
+        if (active) {
+          active.classList.add('text-red-400');
+        }
+      }
+
+      function renderServices(t) {
+        const servicesGrid = document.getElementById('services-grid');
+        servicesGrid.innerHTML = '';
+        t.services.items.forEach((service) => {
+          const card = document.createElement('div');
+          card.className =
+            'bg-slate-800/50 p-8 rounded-lg border border-slate-700/50 hover:border-red-500/50 transition-all transform hover:scale-105';
+
+          card.innerHTML = `
+            <i data-lucide="${service.icon}" class="w-12 h-12 text-red-400 mb-4"></i>
+            <h3 class="text-xl font-semibold mb-3 tracking-wide">${service.title}</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">${service.desc}</p>
+          `;
+          servicesGrid.appendChild(card);
+        });
+      }
+
+      function applyTranslations() {
+        const t = translations[currentLang];
+
+        // Nav
+        document.getElementById('nav-home').textContent = t.nav.home;
+        document.getElementById('nav-about').textContent = t.nav.about;
+        document.getElementById('nav-services').textContent = t.nav.services;
+        document.getElementById('nav-contact').textContent = t.nav.contact;
+
+        // Hero
+        document.getElementById('hero-title').textContent = t.hero.title;
+        document.getElementById('hero-subtitle').textContent = t.hero.subtitle;
+        document.getElementById('hero-cta').textContent = t.hero.cta;
+
+        // About
+        document.getElementById('about-title').textContent = t.about.title;
+        document.getElementById('about-text').textContent = t.about.text;
+        document.getElementById('about-badge-1').textContent = t.about.badges[0];
+        document.getElementById('about-badge-2').textContent = t.about.badges[1];
+        document.getElementById('about-badge-3').textContent = t.about.badges[2];
+
+        // Services
+        document.getElementById('services-title').textContent = t.services.title;
+        renderServices(t);
+
+        // Contact
+        document.getElementById('contact-title').textContent = t.contact.title;
+        document.getElementById('contact-email-label').textContent =
+          t.contact.email;
+        document.getElementById('contact-phone-label').textContent =
+          t.contact.phone;
+        document.getElementById('contact-availability').textContent =
+          t.contact.availability;
+
+        // Regénérer les icônes Lucide
+        if (window.lucide) {
+          lucide.createIcons();
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        // Langues
+        document.querySelectorAll('[data-lang]').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            currentLang = btn.dataset.lang;
+            setActiveLangButton(currentLang);
+            applyTranslations();
+          });
+        });
+
+        // Navigation
+        document.querySelectorAll('[data-section]').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const sectionId = btn.dataset.section;
+            const el = document.getElementById(sectionId);
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth' });
+            }
+            setActiveNav(sectionId);
+          });
+        });
+
+        // CTA hero
+        const heroCta = document.getElementById('hero-cta');
+        heroCta.addEventListener('click', () => {
+          const el = document.getElementById('contact');
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+          setActiveNav('contact');
+        });
+
+        // Première appli de la langue + icônes
+        applyTranslations();
+        setActiveLangButton(currentLang);
+        setActiveNav('home');
+      });
+    </script>
+  </body>
+</html>
