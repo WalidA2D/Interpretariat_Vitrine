@@ -20,24 +20,69 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
+      :root {
+        --primary: #1F2328;
+        --primary-800: #23272d;
+        --primary-50: rgba(31,35,40,0.5);
+        --primary-80: rgba(31,35,40,0.8);
+        --accent: #ffffff;
+      }
       body {
         font-family: "Playfair Display", "Times New Roman", serif;
       }
+
+      /* Page background using your primary color */
+      #page-root {
+        min-height: 100vh;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-800) 50%, var(--primary) 100%);
+        color: white;
+      }
+
+      /* Header / footer and card helpers using the primary color */
+      header.custom-header {
+        background-color: var(--primary-80);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+      }
+
+      footer.custom-footer {
+        background-color: var(--primary);
+        border-top-color: rgba(31,35,40,0.5);
+      }
+
+      .muted-bg {
+        background-color: var(--primary-50);
+      }
+
+      .card-bg {
+        background-color: var(--primary-50);
+        border-color: rgba(31,35,40,0.3);
+      }
+      /* Accent (remplace le rouge) */
+      .accent-bg {
+        background-color: var(--accent);
+      }
+      .accent-text {
+        color: var(--accent) !important;
+      }
+      .accent-hover:hover {
+        color: var(--accent) !important;
+      }
     </style>
   </head>
-  <body class="bg-slate-900 text-white">
-    <div
-      class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white"
+  <body class="text-white">
+    <div id="page-root"
+      class="min-h-screen text-white"
     >
       <!-- Header -->
       <header
-        class="fixed top-0 w-full bg-slate-900/80 backdrop-blur-md z-50 border-b border-slate-700/50"
+        class="fixed top-0 w-full custom-header z-50 border-b"
       >
         <nav
           class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center"
         >
           <div class="flex items-center space-x-2">
-            <i data-lucide="scale" class="w-8 h-8 text-red-500"></i>
+            <i data-lucide="scale" class="w-8 h-8 text-white"></i>
             <span class="text-2xl font-bold tracking-wide">
               Interprétariat
             </span>
@@ -47,28 +92,28 @@
             <button
               data-section="home"
               id="nav-home"
-              class="transition-colors hover:text-red-400 text-red-400"
+              class="transition-colors hover:text-white text-white"
             >
               Accueil
             </button>
             <button
               data-section="about"
               id="nav-about"
-              class="transition-colors hover:text-red-400"
+              class="transition-colors hover:text-white"
             >
               À Propos
             </button>
             <button
               data-section="services"
               id="nav-services"
-              class="transition-colors hover:text-red-400"
+              class="transition-colors hover:text-white"
             >
               Services
             </button>
             <button
               data-section="contact"
               id="nav-contact"
-              class="transition-colors hover:text-red-400"
+              class="transition-colors hover:text-white"
             >
               Contact
             </button>
@@ -76,19 +121,19 @@
 
           <div class="flex space-x-3 text-sm font-semibold tracking-wide">
             <button
-              class="px-3 py-1 rounded bg-red-600 text-slate-900"
+              class="px-3 py-1 rounded accent-bg text-slate-900"
               data-lang="fr"
             >
               FR
             </button>
             <button
-              class="px-3 py-1 rounded bg-slate-700/50 hover:bg-slate-700"
+              class="px-3 py-1 rounded muted-bg hover:opacity-90"
               data-lang="tr"
             >
               TR
             </button>
             <button
-              class="px-3 py-1 rounded bg-slate-700/50 hover:bg-slate-700"
+              class="px-3 py-1 rounded muted-bg hover:opacity-90"
               data-lang="en"
             >
               EN
@@ -107,7 +152,8 @@
           style="background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1600');"
         ></div>
         <div
-          class="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/50 to-slate-900"
+          class="absolute inset-0"
+          style="background: linear-gradient(to bottom, transparent, rgba(31,35,40,0.5), var(--primary));"
         ></div>
 
         <div class="relative z-10 text-center max-w-4xl">
@@ -125,7 +171,7 @@
           </p>
           <button
             id="hero-cta"
-            class="bg-red-600 hover:bg-red-700 text-slate-900 font-semibold px-8 py-4 rounded-lg transition-all transform hover:scale-105 tracking-wide"
+            class="accent-bg hover:opacity-90 text-slate-900 font-semibold px-8 py-4 rounded-lg transition-all transform hover:scale-105 tracking-wide"
             data-scroll-to="contact"
           >
             Nous Contacter
@@ -134,11 +180,11 @@
       </section>
 
       <!-- About Section -->
-      <section id="about" class="py-20 px-6 bg-slate-800/50">
+      <section id="about" class="py-20 px-6 muted-bg">
         <div class="max-w-4xl mx-auto">
           <h2
             id="about-title"
-            class="text-4xl font-bold mb-8 text-center text-red-400 tracking-wide"
+            class="text-4xl font-bold mb-8 text-center text-white tracking-wide"
           >
             Notre Expertise
           </h2>
@@ -161,25 +207,25 @@
                 service professionnel, confidentiel et de haute qualité pour
                 tous vos besoins juridiques et administratifs.
               </p>
-              <div class="mt-6 space-y-3 text-slate-100">
+                <div class="mt-6 space-y-3 text-slate-100">
                 <div class="flex items-center gap-2">
                   <i
                     data-lucide="check-circle"
-                    class="w-5 h-5 text-red-400"
+                    class="w-5 h-5 text-white"
                   ></i>
                   <span id="about-badge-1">Traducteurs assermentés</span>
                 </div>
                 <div class="flex items-center gap-2">
                   <i
                     data-lucide="check-circle"
-                    class="w-5 h-5 text-red-400"
+                    class="w-5 h-5 text-white"
                   ></i>
                   <span id="about-badge-2">15+ années d'expérience</span>
                 </div>
                 <div class="flex items-center gap-2">
                   <i
                     data-lucide="check-circle"
-                    class="w-5 h-5 text-red-400"
+                    class="w-5 h-5 text-white"
                   ></i>
                   <span id="about-badge-3">Confidentialité garantie</span>
                 </div>
@@ -194,7 +240,7 @@
         <div class="max-w-6xl mx-auto">
           <h2
             id="services-title"
-            class="text-4xl font-bold mb-12 text-center text-red-400 tracking-wide"
+            class="text-4xl font-bold mb-12 text-center text-white tracking-wide"
           >
             Nos Services
           </h2>
@@ -205,20 +251,20 @@
       </section>
 
       <!-- Contact Section -->
-      <section id="contact" class="py-20 px-6 bg-slate-800/50">
+      <section id="contact" class="py-20 px-6 muted-bg">
         <div class="max-w-4xl mx-auto">
           <h2
             id="contact-title"
-            class="text-4xl font-bold mb-12 text-center text-red-400 tracking-wide"
+            class="text-4xl font-bold mb-12 text-center text-white tracking-wide"
           >
             Contactez-Nous
           </h2>
           <div class="grid md:grid-cols-2 gap-8">
             <div
-              class="bg-slate-900/50 p-8 rounded-lg border border-slate-700/50"
+              class="card-bg p-8 rounded-lg border"
             >
               <div class="flex items-center gap-4 mb-4">
-                <i data-lucide="mail" class="w-8 h-8 text-red-400"></i>
+                <i data-lucide="mail" class="w-8 h-8 text-white"></i>
                 <div>
                   <p
                     id="contact-email-label"
@@ -228,7 +274,7 @@
                   </p>
                   <a
                     href="mailto:interpretes@example.com"
-                    class="text-lg hover:text-red-400 transition-colors"
+                    class="text-lg hover:text-white transition-colors"
                   >
                     interpretes@example.com
                   </a>
@@ -237,10 +283,10 @@
             </div>
 
             <div
-              class="bg-slate-900/50 p-8 rounded-lg border border-slate-700/50"
+              class="card-bg p-8 rounded-lg border"
             >
               <div class="flex items-center gap-4 mb-4">
-                <i data-lucide="phone" class="w-8 h-8 text-red-400"></i>
+                <i data-lucide="phone" class="w-8 h-8 text-white"></i>
                 <div>
                   <p
                     id="contact-phone-label"
@@ -250,7 +296,7 @@
                   </p>
                   <a
                     href="tel:+33123456789"
-                    class="text-lg hover:text-red-400 transition-colors"
+                    class="text-lg hover:text-white transition-colors"
                   >
                     +33 1 23 45 67 89
                   </a>
@@ -261,7 +307,7 @@
 
           <p
             id="contact-availability"
-            class="text-center text-red-400 mt-8 font-semibold tracking-wide"
+            class="text-center text-white mt-8 font-semibold tracking-wide"
           >
             Disponibles 7j/7 pour vos urgences
           </p>
@@ -269,7 +315,7 @@
       </section>
 
       <!-- Footer -->
-      <footer class="bg-slate-900 py-8 px-6 border-t border-slate-700/50">
+      <footer class="custom-footer py-8 px-6 border-t">
         <div
           class="max-w-6xl mx-auto text-center text-slate-400 text-sm tracking-wide"
         >
@@ -438,23 +484,23 @@
       function setActiveLangButton(lang) {
         document
           .querySelectorAll('[data-lang]')
-          .forEach((btn) =>
-            btn.classList.remove('bg-red-600', 'text-slate-900')
-          );
+            .forEach((btn) =>
+              btn.classList.remove('accent-bg', 'text-slate-900')
+            );
         const active = document.querySelector(`[data-lang="${lang}"]`);
         if (active) {
-          active.classList.add('bg-red-600', 'text-slate-900');
+          active.classList.add('accent-bg', 'text-slate-900');
         }
       }
 
       function setActiveNav(sectionId) {
         document
           .querySelectorAll('[data-section]')
-          .forEach((btn) => btn.classList.remove('text-red-400'));
-        const active = document.querySelector(`[data-section="${sectionId}"]`);
-        if (active) {
-          active.classList.add('text-red-400');
-        }
+            .forEach((btn) => btn.classList.remove('text-white'));
+          const active = document.querySelector(`[data-section="${sectionId}"]`);
+          if (active) {
+            active.classList.add('text-white');
+          }
       }
 
       function renderServices(t) {
@@ -463,10 +509,10 @@
         t.services.items.forEach((service) => {
           const card = document.createElement('div');
           card.className =
-            'bg-slate-800/50 p-8 rounded-lg border border-slate-700/50 hover:border-red-500/50 transition-all transform hover:scale-105';
+            'card-bg p-8 rounded-lg border hover:border-white/50 transition-all transform hover:scale-105';
 
           card.innerHTML = `
-            <i data-lucide="${service.icon}" class="w-12 h-12 text-red-400 mb-4"></i>
+            <i data-lucide="${service.icon}" class="w-12 h-12 text-white mb-4"></i>
             <h3 class="text-xl font-semibold mb-3 tracking-wide">${service.title}</h3>
             <p class="text-slate-300 text-sm leading-relaxed">${service.desc}</p>
           `;
