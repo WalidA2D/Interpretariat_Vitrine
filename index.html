@@ -21,24 +21,32 @@
 
     <style>
       :root {
-        --primary: #1F2328;
+        --primary: #1f2328;
         --primary-800: #23272d;
-        --primary-50: rgba(31,35,40,0.5);
-        --primary-80: rgba(31,35,40,0.8);
+        --primary-50: rgba(31, 35, 40, 0.5);
+        --primary-80: rgba(31, 35, 40, 0.8);
         --accent: #ffffff;
       }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
       body {
         font-family: "Playfair Display", "Times New Roman", serif;
       }
 
-      /* Page background using your primary color */
       #page-root {
         min-height: 100vh;
-        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-800) 50%, var(--primary) 100%);
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-800) 50%,
+          var(--primary) 100%
+        );
         color: white;
       }
 
-      /* Header / footer and card helpers using the primary color */
       header.custom-header {
         background-color: var(--primary-80);
         backdrop-filter: blur(6px);
@@ -47,7 +55,7 @@
 
       footer.custom-footer {
         background-color: var(--primary);
-        border-top-color: rgba(31,35,40,0.5);
+        border-top-color: rgba(31, 35, 40, 0.5);
       }
 
       .muted-bg {
@@ -56,9 +64,9 @@
 
       .card-bg {
         background-color: var(--primary-50);
-        border-color: rgba(31,35,40,0.3);
+        border-color: rgba(31, 35, 40, 0.3);
       }
-      /* Accent (remplace le rouge) */
+
       .accent-bg {
         background-color: var(--accent);
       }
@@ -68,111 +76,123 @@
       .accent-hover:hover {
         color: var(--accent) !important;
       }
+
+      /* éviter que le header fixe "mange" le début des sections */
+      section {
+        scroll-margin-top: 96px;
+      }
     </style>
   </head>
+
   <body class="text-white">
-    <div id="page-root"
-      class="min-h-screen text-white"
-    >
+    <div id="page-root" class="min-h-screen text-white">
       <!-- Header -->
-      <header
-        class="fixed top-0 w-full custom-header z-50 border-b"
-      >
-        <nav
-          class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center"
-        >
-          <div class="flex items-center space-x-2">
-            <i data-lucide="scale" class="w-8 h-8 text-white"></i>
-            <span class="text-2xl font-bold tracking-wide">
-              Interprétariat
-            </span>
+      <header class="fixed top-0 w-full custom-header z-50 border-b border-white/10">
+        <nav class="max-w-6xl mx-auto px-4 sm:px-6 py-4">
+          <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+              <i data-lucide="scale" class="w-8 h-8 text-white"></i>
+              <span class="text-2xl font-bold tracking-wide">Interprétariat</span>
+            </div>
+
+            <!-- Desktop nav -->
+            <div class="hidden md:flex space-x-8 text-sm uppercase tracking-wide">
+              <button data-section="home" id="nav-home" class="transition-colors hover:text-white text-white">
+                Accueil
+              </button>
+              <button data-section="about" id="nav-about" class="transition-colors hover:text-white">
+                À Propos
+              </button>
+              <button data-section="role" id="nav-role" class="transition-colors hover:text-white">
+                Notre rôle
+              </button>
+              <button data-section="services" id="nav-services" class="transition-colors hover:text-white">
+                Services
+              </button>
+              <button data-section="contact" id="nav-contact" class="transition-colors hover:text-white">
+                Contact
+              </button>
+            </div>
+
+            <!-- Lang buttons (desktop) -->
+            <div class="hidden md:flex space-x-3 text-sm font-semibold tracking-wide">
+              <button class="px-3 py-1 rounded accent-bg text-slate-900" data-lang="fr">FR</button>
+              <button class="px-3 py-1 rounded muted-bg hover:opacity-90" data-lang="tr">TR</button>
+              <button class="px-3 py-1 rounded muted-bg hover:opacity-90" data-lang="en">EN</button>
+            </div>
+
+            <!-- Mobile controls -->
+            <div class="md:hidden flex items-center gap-3">
+              <div class="flex space-x-2 text-xs font-semibold tracking-wide">
+                <button class="px-2.5 py-1 rounded accent-bg text-slate-900" data-lang="fr">FR</button>
+                <button class="px-2.5 py-1 rounded muted-bg hover:opacity-90" data-lang="tr">TR</button>
+                <button class="px-2.5 py-1 rounded muted-bg hover:opacity-90" data-lang="en">EN</button>
+              </div>
+
+              <button
+                id="mobile-menu-btn"
+                class="p-2 rounded-lg border border-white/15 bg-white/5 hover:bg-white/10 transition"
+                aria-label="Menu"
+                aria-expanded="false"
+              >
+                <i data-lucide="menu" class="w-6 h-6 text-white"></i>
+              </button>
+            </div>
           </div>
 
-          <div class="hidden md:flex space-x-8 text-sm uppercase tracking-wide">
-            <button
-              data-section="home"
-              id="nav-home"
-              class="transition-colors hover:text-white text-white"
-            >
-              Accueil
-            </button>
-            <button
-              data-section="about"
-              id="nav-about"
-              class="transition-colors hover:text-white"
-            >
-              À Propos
-            </button>
-            <button
-              data-section="services"
-              id="nav-services"
-              class="transition-colors hover:text-white"
-            >
-              Services
-            </button>
-            <button
-              data-section="contact"
-              id="nav-contact"
-              class="transition-colors hover:text-white"
-            >
-              Contact
-            </button>
-          </div>
-
-          <div class="flex space-x-3 text-sm font-semibold tracking-wide">
-            <button
-              class="px-3 py-1 rounded accent-bg text-slate-900"
-              data-lang="fr"
-            >
-              FR
-            </button>
-            <button
-              class="px-3 py-1 rounded muted-bg hover:opacity-90"
-              data-lang="tr"
-            >
-              TR
-            </button>
-            <button
-              class="px-3 py-1 rounded muted-bg hover:opacity-90"
-              data-lang="en"
-            >
-              EN
-            </button>
+          <!-- Mobile menu dropdown -->
+          <div
+            id="mobile-menu"
+            class="md:hidden mt-4 hidden rounded-xl border border-white/10 bg-black/10 overflow-hidden"
+          >
+            <div class="flex flex-col">
+              <button data-section="home" class="mobile-nav-item px-4 py-3 text-left hover:bg-white/5 transition">
+                Accueil
+              </button>
+              <button data-section="about" class="mobile-nav-item px-4 py-3 text-left hover:bg-white/5 transition">
+                À Propos
+              </button>
+              <button data-section="role" class="mobile-nav-item px-4 py-3 text-left hover:bg-white/5 transition">
+                Notre rôle
+              </button>
+              <button data-section="services" class="mobile-nav-item px-4 py-3 text-left hover:bg-white/5 transition">
+                Services
+              </button>
+              <button data-section="contact" class="mobile-nav-item px-4 py-3 text-left hover:bg-white/5 transition">
+                Contact
+              </button>
+            </div>
           </div>
         </nav>
       </header>
 
       <!-- Hero Section -->
-      <section
-        id="home"
-        class="relative min-h-screen flex items-center justify-center pt-20 px-6"
-      >
+      <section id="home" class="relative min-h-screen flex items-center justify-center pt-24 px-4 sm:px-6">
         <div
           class="absolute inset-0 opacity-20 bg-cover bg-center"
           style="background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1600');"
         ></div>
         <div
           class="absolute inset-0"
-          style="background: linear-gradient(to bottom, transparent, rgba(31,35,40,0.5), var(--primary));"
+          style="background: linear-gradient(to bottom, transparent, rgba(31,35,40,0.55), var(--primary));"
         ></div>
 
-        <div class="relative z-10 text-center max-w-4xl">
+        <div class="relative z-10 text-center max-w-4xl w-full">
           <h1
             id="hero-title"
-            class="text-5xl md:text-7xl font-bold mb-6 leading-tight tracking-tight"
+            class="text-4xl sm:text-5xl md:text-7xl font-bold mb-5 leading-tight tracking-tight"
           >
             Interprétariat Judiciaire
           </h1>
           <p
             id="hero-subtitle"
-            class="text-xl md:text-2xl text-slate-200 mb-8 font-light tracking-wide"
+            class="text-base sm:text-lg md:text-2xl text-slate-200 mb-7 font-light tracking-wide px-2"
           >
-            Excellence et Précision dans la Traduction Juridique Turc-Français
+            Excellence et Précision dans la Traduction Juridique
           </p>
           <button
             id="hero-cta"
-            class="accent-bg hover:opacity-90 text-slate-900 font-semibold px-8 py-4 rounded-lg transition-all transform hover:scale-105 tracking-wide"
-            data-scroll-to="contact"
+            class="accent-bg hover:opacity-90 text-slate-900 font-semibold px-7 sm:px-8 py-3.5 sm:py-4 rounded-lg transition-all transform hover:scale-[1.02] tracking-wide"
           >
             Nous Contacter
           </button>
@@ -180,53 +200,38 @@
       </section>
 
       <!-- About Section -->
-      <section id="about" class="py-20 px-6 muted-bg">
+      <section id="about" class="py-16 sm:py-20 px-4 sm:px-6 muted-bg">
         <div class="max-w-4xl mx-auto">
-          <h2
-            id="about-title"
-            class="text-4xl font-bold mb-8 text-center text-white tracking-wide"
-          >
+          <h2 id="about-title" class="text-3xl sm:text-4xl font-bold mb-10 text-center text-white tracking-wide">
             Notre Expertise
           </h2>
-          <div class="flex flex-col md:flex-row gap-8 items-center">
-            <div class="md:w-1/2">
+
+          <div class="flex flex-col lg:flex-row gap-8 items-center">
+            <div class="w-full lg:w-1/2">
               <img
                 src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=800"
                 alt="Justice"
-                class="rounded-lg shadow-2xl"
+                class="rounded-lg shadow-2xl w-full h-auto object-cover"
+                loading="lazy"
               />
             </div>
-            <div class="md:w-1/2">
-              <p
-                id="about-text"
-                class="text-lg text-slate-200 leading-relaxed"
-              >
-                Experts assermentés en interprétariat judiciaire, nous mettons à
-                votre service plus de 15 ans d'expérience dans la traduction
-                juridique turc-français. Notre entreprise familiale garantit un
-                service professionnel, confidentiel et de haute qualité pour
-                tous vos besoins juridiques et administratifs.
+
+            <div class="w-full lg:w-1/2">
+              <p id="about-text" class="text-base sm:text-lg text-slate-200 leading-relaxed">
+                <!-- Rempli par JS -->
               </p>
-                <div class="mt-6 space-y-3 text-slate-100">
+
+              <div class="mt-6 space-y-3 text-slate-100">
                 <div class="flex items-center gap-2">
-                  <i
-                    data-lucide="check-circle"
-                    class="w-5 h-5 text-white"
-                  ></i>
-                  <span id="about-badge-1">Traducteurs assermentés</span>
+                  <i data-lucide="check-circle" class="w-5 h-5 text-white shrink-0"></i>
+                  <span id="about-badge-1">Interprète assermentés</span>
                 </div>
                 <div class="flex items-center gap-2">
-                  <i
-                    data-lucide="check-circle"
-                    class="w-5 h-5 text-white"
-                  ></i>
-                  <span id="about-badge-2">15+ années d'expérience</span>
+                  <i data-lucide="check-circle" class="w-5 h-5 text-white shrink-0"></i>
+                  <span id="about-badge-2"><!-- Rempli par JS --></span>
                 </div>
                 <div class="flex items-center gap-2">
-                  <i
-                    data-lucide="check-circle"
-                    class="w-5 h-5 text-white"
-                  ></i>
+                  <i data-lucide="check-circle" class="w-5 h-5 text-white shrink-0"></i>
                   <span id="about-badge-3">Confidentialité garantie</span>
                 </div>
               </div>
@@ -235,365 +240,462 @@
         </div>
       </section>
 
-      <!-- Services Section -->
-      <section id="services" class="py-20 px-6">
+      <!-- Role Section -->
+      <section id="role" class="py-16 sm:py-20 px-4 sm:px-6">
         <div class="max-w-6xl mx-auto">
-          <h2
-            id="services-title"
-            class="text-4xl font-bold mb-12 text-center text-white tracking-wide"
-          >
+          <h2 id="role-title" class="text-3xl sm:text-4xl font-bold mb-10 text-center text-white tracking-wide">
+            Notre rôle
+          </h2>
+
+          <div class="card-bg p-6 sm:p-8 rounded-lg border border-white/10">
+            <p id="role-paragraph" class="text-slate-200 leading-relaxed text-base sm:text-lg">
+              <!-- Rempli par JS -->
+            </p>
+
+            <div class="mt-8 pt-6 border-t border-white/15">
+              <h3 id="role-modes-title" class="text-lg sm:text-xl font-semibold text-white mb-4">
+                Modes d’interprétation proposés
+              </h3>
+
+              <ul id="role-modes" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <!-- Rempli par JS -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Section -->
+      <section id="services" class="py-16 sm:py-20 px-4 sm:px-6">
+        <div class="max-w-6xl mx-auto">
+          <h2 id="services-title" class="text-3xl sm:text-4xl font-bold mb-10 sm:mb-12 text-center text-white tracking-wide">
             Nos Services
           </h2>
-          <div id="services-grid" class="grid md:grid-cols-3 gap-8">
+
+          <div id="services-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             <!-- Rempli par JS -->
           </div>
         </div>
       </section>
 
       <!-- Contact Section -->
-      <section id="contact" class="py-20 px-6 muted-bg">
-        <div class="max-w-4xl mx-auto">
-          <h2
-            id="contact-title"
-            class="text-4xl font-bold mb-12 text-center text-white tracking-wide"
-          >
+      <section id="contact" class="py-16 sm:py-20 px-4 sm:px-6 muted-bg">
+        <div class="max-w-6xl mx-auto">
+          <h2 id="contact-title" class="text-3xl sm:text-4xl font-bold mb-10 sm:mb-12 text-center text-white tracking-wide">
             Contactez-Nous
           </h2>
-          <div class="grid md:grid-cols-2 gap-8">
-            <div
-              class="card-bg p-8 rounded-lg border"
-            >
-              <div class="flex items-center gap-4 mb-4">
-                <i data-lucide="mail" class="w-8 h-8 text-white"></i>
-                <div>
-                  <p
-                    id="contact-email-label"
-                    class="text-sm text-slate-400 uppercase tracking-wide"
-                  >
-                    Email
-                  </p>
-                  <a
-                    href="mailto:interpretes@example.com"
-                    class="text-lg hover:text-white transition-colors"
-                  >
-                    interpretes@example.com
-                  </a>
-                </div>
-              </div>
-            </div>
 
-            <div
-              class="card-bg p-8 rounded-lg border"
-            >
-              <div class="flex items-center gap-4 mb-4">
-                <i data-lucide="phone" class="w-8 h-8 text-white"></i>
-                <div>
-                  <p
-                    id="contact-phone-label"
-                    class="text-sm text-slate-400 uppercase tracking-wide"
-                  >
-                    Téléphone
-                  </p>
-                  <a
-                    href="tel:+33123456789"
-                    class="text-lg hover:text-white transition-colors"
-                  >
-                    +33 1 23 45 67 89
-                  </a>
-                </div>
-              </div>
-            </div>
+          <div id="profiles-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <!-- Rempli par JS -->
           </div>
 
-          <p
-            id="contact-availability"
-            class="text-center text-white mt-8 font-semibold tracking-wide"
-          >
-            Disponibles 7j/7 pour vos urgences
+          <p id="contact-availability" class="text-center text-white mt-10 font-semibold tracking-wide">
+            Disponibles 7j/7 24h/24 pour vos urgences
           </p>
         </div>
       </section>
 
       <!-- Footer -->
-      <footer class="custom-footer py-8 px-6 border-t">
-        <div
-          class="max-w-6xl mx-auto text-center text-slate-400 text-sm tracking-wide"
-        >
+      <footer class="custom-footer py-8 px-6 border-t border-white/10">
+        <div class="max-w-6xl mx-auto text-center text-slate-400 text-sm tracking-wide">
           <p>© 2025 Interprétariat Judiciaire - Tous droits réservés</p>
         </div>
       </footer>
     </div>
 
-    <!-- Script de langue & navigation -->
     <script>
+      // Base année de référence
+      const START_YEAR = 2005;
+
+      function getExperienceYears() {
+        const y = new Date().getFullYear() - START_YEAR;
+        return Math.max(0, y);
+      }
+
+      function withYears(str, years) {
+        return String(str).replaceAll("{years}", String(years));
+      }
+
       const translations = {
         fr: {
-          nav: {
-            home: 'Accueil',
-            about: 'À Propos',
-            services: 'Services',
-            contact: 'Contact',
-          },
-          hero: {
-            title: 'Interprétariat Judiciaire',
-            subtitle:
-              'Excellence et Précision dans la Traduction Juridique Turc-Français',
-            cta: 'Nous Contacter',
-          },
+          nav: { home: "Accueil", about: "À Propos", role: "Notre rôle", services: "Services", contact: "Contact" },
+          hero: { title: "Interprétariat Judiciaire", subtitle: "Excellence et Précision dans la Traduction Juridique", cta: "Nous Contacter" },
           about: {
-            title: 'Notre Expertise',
+            title: "Notre Expertise",
             text:
-              "Experts assermentés en interprétariat judiciaire, nous mettons à votre service plus de 15 ans d'expérience dans la traduction juridique turc-français. Notre entreprise familiale garantit un service professionnel, confidentiel et de haute qualité pour tous vos besoins juridiques et administratifs.",
-            badges: [
-              'Traducteurs assermentés',
-              "15+ années d'expérience",
-              'Confidentialité garantie',
-            ],
+              "Experts assermentés en interprétariat judiciaire, nous mettons à votre service plus de {years} ans d'expérience dans la traduction juridique. Notre entreprise garantit un service professionnel, confidentiel et de haute qualité pour toutes vos demandes juridiques et administratives.",
+            badges: ["Interprète assermentés", "{years}+ années d'expérience", "Confidentialité garantie"],
+          },
+          role: {
+            title: "Notre rôle",
+            paragraph:
+              "Nous garantissons une traduction orale fidèle et précise des échanges entre toutes les parties, dans le respect d’une confidentialité et d’une neutralité strictes, avec une parfaite maîtrise du vocabulaire juridique et des exigences du cadre judiciaire.",
+            modesTitle: "Modes d’interprétation proposés",
+            modes: ["Simultanée", "Consécutive", "Liaison"],
           },
           services: {
-            title: 'Nos Services',
+            title: "Nos Services",
             items: [
               {
-                icon: 'scale',
-                title: 'Interprétariat Judiciaire',
-                desc: 'Tribunaux, audiences, procédures légales',
+                icon: "gavel",
+                title: "Audiences & procédures judiciaires",
+                desc:
+                  "Interprétation en tribunaux civils, pénaux, correctionnels et administratifs.\nComparutions immédiates et accompagnement tout au long de la procédure.",
               },
               {
-                icon: 'file-text',
-                title: 'Traduction Assermentée',
-                desc: 'Documents officiels et juridiques',
+                icon: "shield",
+                title: "Police & gendarmerie",
+                desc:
+                  "Interprétation en garde à vue, interrogatoires, auditions et confrontations.\nPour victimes, témoins, mis en cause et parties civiles.",
               },
               {
-                icon: 'users',
-                title: 'Accompagnement',
-                desc: 'Services administratifs et consulaires',
+                icon: "clipboard-check",
+                title: "Expertises judiciaires",
+                desc:
+                  "Interprétation lors d’expertises médicales, psychologiques ou sociales.\nAssistance linguistique dans le cadre des évaluations.",
+              },
+              {
+                icon: "message-circle",
+                title: "Entretiens avec les avocats",
+                desc:
+                  "Assistance linguistique pour garantir la compréhension des droits.\nExplication claire des procédures et des étapes à suivre.",
+              },
+              {
+                icon: "file-text",
+                title: "Droits & décisions judiciaires",
+                desc:
+                  "Notification et explication des droits, décisions et obligations légales.\nTraduction orale des convocations et actes liés à la procédure.",
+              },
+              {
+                icon: "file-signature",
+                title: "Traduction & démarches administratives",
+                desc:
+                  "Traduction écrite : jugements, PV, plaintes, convocations, actes officiels.\nAssistance dans les démarches liées à la justice (Préfecture, OFII, administrations).",
               },
             ],
           },
           contact: {
-            title: 'Contactez-Nous',
-            email: 'Email',
-            phone: 'Téléphone',
-            availability: 'Disponibles 7j/7 pour vos urgences',
+            title: "Contactez-Nous",
+            emailLabel: "Email",
+            phoneLabel: "Téléphone",
+            languagesLabel: "Langues",
+            availability: "Disponibles 7j/7 24h/24 pour vos urgences",
+            profiles: [
+              { name: "Selma Asci", phone: "0627462384", email: "selis77@hotmail.fr", role: "Interprète experte assermentée (Cour d’Appel de Paris)", languages: "Turc / Français" },
+              { name: "Sukru Senyavuz", phone: "0624516246", email: "keci@hotmail.fr", role: "Interprète assermenté (Cour d’Appel d’Evry)", languages: "Turc / Français / Anglais" },
+              { name: "Melisa Senyavuz", phone: "0652974677", email: "mel.senyavuz@gmail.com", role: "Interprète", languages: "Turc / Français" },
+            ],
           },
         },
+
         tr: {
-          nav: {
-            home: 'Ana Sayfa',
-            about: 'Hakkımızda',
-            services: 'Hizmetler',
-            contact: 'İletişim',
-          },
-          hero: {
-            title: 'Adli Tercümanlık',
-            subtitle:
-              'Türkçe-Fransızca Hukuki Tercümede Mükemmellik ve Hassasiyet',
-            cta: 'Bize Ulaşın',
-          },
+          nav: { home: "Ana Sayfa", about: "Hakkımızda", role: "Rolümüz", services: "Hizmetler", contact: "İletişim" },
+          hero: { title: "Adli Tercümanlık", subtitle: "Hukuki Tercümede Mükemmellik ve Hassasiyet", cta: "Bize Ulaşın" },
           about: {
-            title: 'Uzmanlığımız',
+            title: "Uzmanlığımız",
             text:
-              'Yeminli adli tercüman uzmanları olarak, Türkçe-Fransızca hukuki tercüme alanında 15 yılı aşkın deneyimimizi hizmetinize sunuyoruz. Aile şirketimiz, tüm yasal ve idari ihtiyaçlarınız için profesyonel, gizli ve yüksek kaliteli bir hizmet garantisi vermektedir.',
-            badges: [
-              'Yeminli tercümanlar',
-              '15+ yıllık deneyim',
-              'Gizlilik garantisi',
-            ],
+              "Yeminli adli tercümanlar olarak, hukuki tercüme alanında {years} yılı aşkın deneyimimizi hizmetinize sunuyoruz. Kuruluşumuz, tüm hukuki ve idari talepleriniz için profesyonel, gizli ve yüksek kaliteli bir hizmet garanti eder.",
+            badges: ["Yeminli tercümanlar", "{years}+ yıllık deneyim", "Gizlilik garantisi"],
+          },
+          role: {
+            title: "Rolümüz",
+            paragraph:
+              "Tüm taraflar arasındaki konuşmaların doğru, eksiksiz ve güvenilir biçimde sözlü aktarımını garanti ederiz; kesin gizlilik ve tarafsızlık ilkelerine bağlı kalarak, hukuki terminolojiye ve adli sürecin gerekliliklerine tam hâkimiyetle çalışırız.",
+            modesTitle: "Sunulan tercümanlık türleri",
+            modes: ["Simultane", "Ardıl (Konsekütif)", "Liaison (Bağlantı)"],
           },
           services: {
-            title: 'Hizmetlerimiz',
+            title: "Hizmetlerimiz",
             items: [
-              {
-                icon: 'scale',
-                title: 'Adli Tercümanlık',
-                desc: 'Mahkemeler, duruşmalar, yasal prosedürler',
-              },
-              {
-                icon: 'file-text',
-                title: 'Yeminli Tercüme',
-                desc: 'Resmi ve hukuki belgeler',
-              },
-              {
-                icon: 'users',
-                title: 'Eşlik Hizmeti',
-                desc: 'İdari ve konsolosluk hizmetleri',
-              },
+              { icon: "gavel", title: "Duruşmalar ve adli süreçler", desc: "Hukuk, ceza, asliye ceza ve idare mahkemelerinde tercümanlık.\nDerhal yargılama süreçlerinde prosedür boyunca destek." },
+              { icon: "shield", title: "Polis ve jandarma", desc: "Gözaltı, sorgu, ifade alma ve yüzleştirmelerde tercümanlık.\nMağdur, tanık, şüpheli ve müşteki taraflar için." },
+              { icon: "clipboard-check", title: "Adli değerlendirmeler", desc: "Tıbbi, psikolojik veya sosyal uzman değerlendirmelerinde tercümanlık.\nSüreçte dil desteği ve eşlik." },
+              { icon: "message-circle", title: "Avukat görüşmeleri", desc: "Hakların doğru anlaşılması ve süreçlerin netleştirilmesi.\nProsedür ve adımların açık şekilde aktarılması." },
+              { icon: "file-text", title: "Haklar ve adli kararlar", desc: "Hakların, kararların ve yükümlülüklerin bildirilmesi/açıklanması.\nÇağrılar ve adli işlem belgelerinin sözlü aktarımı." },
+              { icon: "file-signature", title: "Yazılı çeviri ve idari işlemler", desc: "Yazılı çeviri: kararlar, tutanaklar, şikâyetler, çağrılar, resmi belgeler.\nAdaletle ilgili idari işlemler: Prefektörlük, OFII, adli kurumlar." },
             ],
           },
           contact: {
-            title: 'İletişim',
-            email: 'E-posta',
-            phone: 'Telefon',
-            availability: 'Acil durumlarınız için 7/24 hizmetinizdeyiz',
+            title: "Bize Ulaşın",
+            emailLabel: "E-posta",
+            phoneLabel: "Telefon",
+            languagesLabel: "Diller",
+            availability: "Acil durumlarınız için 7/24 hizmetinizdeyiz",
+            profiles: [
+              { name: "Selma Asci", phone: "0627462384", email: "selis77@hotmail.fr", role: "Paris İstinaf Mahkemesi tarafından yeminli uzman tercüman", languages: "Türkçe / Fransızca" },
+              { name: "Sukru Senyavuz", phone: "0624516246", email: "keci@hotmail.fr", role: "Evry İstinaf Mahkemesi tarafından yeminli tercüman", languages: "Türkçe / Fransızca / İngilizce" },
+              { name: "Melisa Senyavuz", phone: "0652974677", email: "mel.senyavuz@gmail.com", role: "Tercüman", languages: "Türkçe / Fransızca" },
+            ],
           },
         },
+
         en: {
-          nav: {
-            home: 'Home',
-            about: 'About',
-            services: 'Services',
-            contact: 'Contact',
-          },
-          hero: {
-            title: 'Legal Interpreting',
-            subtitle:
-              'Excellence and Precision in Turkish-French Legal Translation',
-            cta: 'Contact Us',
-          },
+          nav: { home: "Home", about: "About", role: "Our role", services: "Services", contact: "Contact" },
+          hero: { title: "Judicial Interpreting", subtitle: "Excellence and Precision in Legal Translation", cta: "Contact Us" },
           about: {
-            title: 'Our Expertise',
+            title: "Our Expertise",
             text:
-              'As certified judicial interpreters, we bring over 15 years of experience in Turkish-French legal translation to your service. Our family business guarantees professional, confidential, and high-quality service for all your legal and administrative needs.',
-            badges: [
-              'Sworn interpreters',
-              '15+ years of experience',
-              'Guaranteed confidentiality',
-            ],
+              "As sworn judicial interpreters, we bring over {years} years of experience in legal translation to your service. Our firm guarantees a professional, confidential, and high-quality service for all your legal and administrative requests.",
+            badges: ["Sworn interpreters", "{years}+ years of experience", "Guaranteed confidentiality"],
+          },
+          role: {
+            title: "Our role",
+            paragraph:
+              "We guarantee accurate and faithful oral interpretation of all exchanges between the parties involved, with strict confidentiality and neutrality, and a strong command of legal terminology and judicial requirements.",
+            modesTitle: "Interpreting modes available",
+            modes: ["Simultaneous", "Consecutive", "Liaison"],
           },
           services: {
-            title: 'Our Services',
+            title: "Our Services",
             items: [
-              {
-                icon: 'scale',
-                title: 'Legal Interpreting',
-                desc: 'Courts, hearings, legal procedures',
-              },
-              {
-                icon: 'file-text',
-                title: 'Certified Translation',
-                desc: 'Official and legal documents',
-              },
-              {
-                icon: 'users',
-                title: 'Assistance',
-                desc: 'Administrative and consular services',
-              },
+              { icon: "gavel", title: "Court hearings & legal proceedings", desc: "Interpreting for civil, criminal, correctional and administrative courts.\nSupport during immediate hearings throughout the procedure." },
+              { icon: "shield", title: "Police & gendarmerie", desc: "Interpreting during custody, interrogations, interviews and confrontations.\nFor victims, witnesses, suspects and civil parties." },
+              { icon: "clipboard-check", title: "Judicial expert assessments", desc: "Interpreting for medical, psychological or social expert evaluations.\nLanguage support throughout the assessment process." },
+              { icon: "message-circle", title: "Meetings with lawyers", desc: "Language assistance to ensure a clear understanding of rights.\nClear explanation of procedures and next steps." },
+              { icon: "file-text", title: "Rights & judicial decisions", desc: "Notification and explanation of rights, decisions and legal obligations.\nOral translation of summons and procedural documents." },
+              { icon: "file-signature", title: "Written translation & administrative procedures", desc: "Written translation: judgments, reports, complaints, summons, official acts.\nAssistance for justice-related procedures (Prefecture, OFII, administrations)." },
             ],
           },
           contact: {
-            title: 'Contact Us',
-            email: 'Email',
-            phone: 'Phone',
-            availability: 'Available 7 days a week for emergencies',
+            title: "Contact Us",
+            emailLabel: "Email",
+            phoneLabel: "Phone",
+            languagesLabel: "Languages",
+            availability: "Available 24/7 for emergencies",
+            profiles: [
+              { name: "Selma Asci", phone: "0627462384", email: "selis77@hotmail.fr", role: "Sworn senior interpreter (Paris Court of Appeal)", languages: "Turkish / French" },
+              { name: "Sukru Senyavuz", phone: "0624516246", email: "keci@hotmail.fr", role: "Sworn interpreter (Evry Court of Appeal)", languages: "Turkish / French / English" },
+              { name: "Melisa Senyavuz", phone: "0652974677", email: "mel.senyavuz@gmail.com", role: "Interpreter", languages: "Turkish / French" },
+            ],
           },
         },
       };
 
-      let currentLang = 'fr';
+      let currentLang = "fr";
 
       function setActiveLangButton(lang) {
         document
-          .querySelectorAll('[data-lang]')
-            .forEach((btn) =>
-              btn.classList.remove('accent-bg', 'text-slate-900')
-            );
+          .querySelectorAll("[data-lang]")
+          .forEach((btn) => btn.classList.remove("accent-bg", "text-slate-900"));
         const active = document.querySelector(`[data-lang="${lang}"]`);
-        if (active) {
-          active.classList.add('accent-bg', 'text-slate-900');
-        }
+        if (active) active.classList.add("accent-bg", "text-slate-900");
       }
 
       function setActiveNav(sectionId) {
         document
-          .querySelectorAll('[data-section]')
-            .forEach((btn) => btn.classList.remove('text-white'));
-          const active = document.querySelector(`[data-section="${sectionId}"]`);
-          if (active) {
-            active.classList.add('text-white');
-          }
+          .querySelectorAll("[data-section]")
+          .forEach((btn) => btn.classList.remove("text-white"));
+        const active = document.querySelector(`[data-section="${sectionId}"]`);
+        if (active) active.classList.add("text-white");
       }
 
       function renderServices(t) {
-        const servicesGrid = document.getElementById('services-grid');
-        servicesGrid.innerHTML = '';
+        const servicesGrid = document.getElementById("services-grid");
+        servicesGrid.innerHTML = "";
         t.services.items.forEach((service) => {
-          const card = document.createElement('div');
+          const card = document.createElement("div");
           card.className =
-            'card-bg p-8 rounded-lg border hover:border-white/50 transition-all transform hover:scale-105';
-
+            "card-bg p-6 sm:p-7 rounded-xl border border-white/10 hover:border-white/40 transition-all transform hover:scale-[1.01]";
           card.innerHTML = `
-            <i data-lucide="${service.icon}" class="w-12 h-12 text-white mb-4"></i>
-            <h3 class="text-xl font-semibold mb-3 tracking-wide">${service.title}</h3>
-            <p class="text-slate-300 text-sm leading-relaxed">${service.desc}</p>
+            <div class="flex items-start gap-3">
+              <i data-lucide="${service.icon}" class="w-9 h-9 text-white shrink-0 mt-0.5"></i>
+              <div>
+                <h3 class="text-lg font-semibold mb-2 tracking-wide">${service.title}</h3>
+                <p class="text-slate-300 text-sm leading-relaxed whitespace-pre-line">${service.desc}</p>
+              </div>
+            </div>
           `;
           servicesGrid.appendChild(card);
         });
       }
 
+      function renderProfiles(t) {
+        const grid = document.getElementById("profiles-grid");
+        grid.innerHTML = "";
+
+        t.contact.profiles.forEach((p) => {
+          const card = document.createElement("div");
+          card.className =
+            "card-bg p-6 sm:p-8 rounded-xl border border-white/10 hover:border-white/40 transition-all transform hover:scale-[1.01]";
+
+          const isEnglish =
+            (p.languages || "").toLowerCase().includes("anglais") ||
+            (p.languages || "").toLowerCase().includes("english");
+          const englishBadge = isEnglish
+            ? `<span class="ml-2 inline-flex items-center rounded-full bg-white/90 px-2 py-0.5 text-xs font-semibold text-slate-900">EN</span>`
+            : "";
+
+          card.innerHTML = `
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h3 class="text-lg sm:text-xl font-semibold tracking-wide text-white">
+                  ${p.name}
+                  ${englishBadge}
+                </h3>
+                <p class="text-slate-300 text-sm mt-1 leading-relaxed">${p.role}</p>
+              </div>
+              <i data-lucide="user" class="w-7 h-7 text-white shrink-0"></i>
+            </div>
+
+            <div class="mt-6 space-y-4">
+              <div class="flex items-start gap-3">
+                <i data-lucide="phone" class="w-5 h-5 text-white mt-1 shrink-0"></i>
+                <div>
+                  <p class="text-xs text-slate-400 uppercase tracking-wide">${t.contact.phoneLabel}</p>
+                  <a href="tel:${p.phone}" class="text-white hover:text-white/90 transition-colors">
+                    ${p.phone}
+                  </a>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <i data-lucide="mail" class="w-5 h-5 text-white mt-1 shrink-0"></i>
+                <div>
+                  <p class="text-xs text-slate-400 uppercase tracking-wide">${t.contact.emailLabel}</p>
+                  <a href="mailto:${p.email}" class="text-white hover:text-white/90 transition-colors break-all">
+                    ${p.email}
+                  </a>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <i data-lucide="languages" class="w-5 h-5 text-white mt-1 shrink-0"></i>
+                <div>
+                  <p class="text-xs text-slate-400 uppercase tracking-wide">${t.contact.languagesLabel}</p>
+                  <p class="text-slate-200">${p.languages}</p>
+                </div>
+              </div>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+      }
+
+      function renderRole(t) {
+        document.getElementById("role-title").textContent = t.role.title;
+        document.getElementById("role-modes-title").textContent = t.role.modesTitle;
+
+        document.getElementById("role-paragraph").textContent = t.role.paragraph;
+
+        const modes = document.getElementById("role-modes");
+        modes.innerHTML = "";
+        t.role.modes.forEach((m) => {
+          const li = document.createElement("li");
+          li.className = "p-4 rounded-xl border border-white/10 bg-white/5 text-center";
+          li.innerHTML = `<p class="font-semibold text-white">${m}</p>`;
+          modes.appendChild(li);
+        });
+      }
+
       function applyTranslations() {
         const t = translations[currentLang];
+        const years = getExperienceYears();
 
-        // Nav
-        document.getElementById('nav-home').textContent = t.nav.home;
-        document.getElementById('nav-about').textContent = t.nav.about;
-        document.getElementById('nav-services').textContent = t.nav.services;
-        document.getElementById('nav-contact').textContent = t.nav.contact;
+        // Desktop nav labels
+        document.getElementById("nav-home").textContent = t.nav.home;
+        document.getElementById("nav-about").textContent = t.nav.about;
+        document.getElementById("nav-role").textContent = t.nav.role;
+        document.getElementById("nav-services").textContent = t.nav.services;
+        document.getElementById("nav-contact").textContent = t.nav.contact;
+
+        // Mobile nav labels
+        document.querySelectorAll(".mobile-nav-item").forEach((btn) => {
+          const k = btn.dataset.section;
+          if (k === "home") btn.textContent = t.nav.home;
+          if (k === "about") btn.textContent = t.nav.about;
+          if (k === "role") btn.textContent = t.nav.role;
+          if (k === "services") btn.textContent = t.nav.services;
+          if (k === "contact") btn.textContent = t.nav.contact;
+        });
 
         // Hero
-        document.getElementById('hero-title').textContent = t.hero.title;
-        document.getElementById('hero-subtitle').textContent = t.hero.subtitle;
-        document.getElementById('hero-cta').textContent = t.hero.cta;
+        document.getElementById("hero-title").textContent = t.hero.title;
+        document.getElementById("hero-subtitle").textContent = t.hero.subtitle;
+        document.getElementById("hero-cta").textContent = t.hero.cta;
 
         // About
-        document.getElementById('about-title').textContent = t.about.title;
-        document.getElementById('about-text').textContent = t.about.text;
-        document.getElementById('about-badge-1').textContent = t.about.badges[0];
-        document.getElementById('about-badge-2').textContent = t.about.badges[1];
-        document.getElementById('about-badge-3').textContent = t.about.badges[2];
+        document.getElementById("about-title").textContent = t.about.title;
+        document.getElementById("about-text").textContent = withYears(t.about.text, years);
+        document.getElementById("about-badge-1").textContent = t.about.badges[0];
+        document.getElementById("about-badge-2").textContent = withYears(t.about.badges[1], years);
+        document.getElementById("about-badge-3").textContent = t.about.badges[2];
+
+        // Role
+        renderRole(t);
 
         // Services
-        document.getElementById('services-title').textContent = t.services.title;
+        document.getElementById("services-title").textContent = t.services.title;
         renderServices(t);
 
         // Contact
-        document.getElementById('contact-title').textContent = t.contact.title;
-        document.getElementById('contact-email-label').textContent =
-          t.contact.email;
-        document.getElementById('contact-phone-label').textContent =
-          t.contact.phone;
-        document.getElementById('contact-availability').textContent =
-          t.contact.availability;
+        document.getElementById("contact-title").textContent = t.contact.title;
+        renderProfiles(t);
+        document.getElementById("contact-availability").textContent = t.contact.availability;
 
-        // Regénérer les icônes Lucide
-        if (window.lucide) {
-          lucide.createIcons();
-        }
+        // Icons
+        if (window.lucide) lucide.createIcons();
       }
 
-      document.addEventListener('DOMContentLoaded', () => {
-        // Langues
-        document.querySelectorAll('[data-lang]').forEach((btn) => {
-          btn.addEventListener('click', () => {
+      function scrollToSection(sectionId) {
+        const el = document.getElementById(sectionId);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }
+
+      function closeMobileMenu() {
+        const menu = document.getElementById("mobile-menu");
+        const btn = document.getElementById("mobile-menu-btn");
+        if (!menu || !btn) return;
+        menu.classList.add("hidden");
+        btn.setAttribute("aria-expanded", "false");
+      }
+
+      function toggleMobileMenu() {
+        const menu = document.getElementById("mobile-menu");
+        const btn = document.getElementById("mobile-menu-btn");
+        if (!menu || !btn) return;
+        const willOpen = menu.classList.contains("hidden");
+        menu.classList.toggle("hidden");
+        btn.setAttribute("aria-expanded", String(willOpen));
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        // Langues (desktop + mobile)
+        document.querySelectorAll("[data-lang]").forEach((btn) => {
+          btn.addEventListener("click", () => {
             currentLang = btn.dataset.lang;
             setActiveLangButton(currentLang);
             applyTranslations();
           });
         });
 
-        // Navigation
-        document.querySelectorAll('[data-section]').forEach((btn) => {
-          btn.addEventListener('click', () => {
+        // Desktop nav
+        document.querySelectorAll("button[data-section]").forEach((btn) => {
+          btn.addEventListener("click", () => {
             const sectionId = btn.dataset.section;
-            const el = document.getElementById(sectionId);
-            if (el) {
-              el.scrollIntoView({ behavior: 'smooth' });
-            }
+            scrollToSection(sectionId);
             setActiveNav(sectionId);
+            closeMobileMenu();
           });
         });
 
-        // CTA hero
-        const heroCta = document.getElementById('hero-cta');
-        heroCta.addEventListener('click', () => {
-          const el = document.getElementById('contact');
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
-          setActiveNav('contact');
+        // Mobile menu toggle
+        document.getElementById("mobile-menu-btn")?.addEventListener("click", toggleMobileMenu);
+
+        // CTA
+        document.getElementById("hero-cta").addEventListener("click", () => {
+          scrollToSection("contact");
+          setActiveNav("contact");
+          closeMobileMenu();
         });
 
-        // Première appli de la langue + icônes
+        // Fermer le menu mobile si on repasse en desktop (rotation / resize)
+        window.addEventListener("resize", () => {
+          if (window.innerWidth >= 768) closeMobileMenu();
+        });
+
         applyTranslations();
         setActiveLangButton(currentLang);
-        setActiveNav('home');
+        setActiveNav("home");
       });
     </script>
   </body>
